@@ -35,9 +35,13 @@ namespace CommanderGQL
             .AddType<PlatformType>()
             .AddType<CommanderGQL.GraphQL.Command.CommandType>()
             .AddMutationType<Mutation>()
+            .AddSubscriptionType<Subscription>()
+            
            // .AddProjections()
             .AddFiltering()
-            .AddSorting();
+            
+            .AddSorting()
+            .AddInMemorySubscriptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +51,7 @@ namespace CommanderGQL
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseWebSockets();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
